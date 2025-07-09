@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 import json
 from pathlib import Path
+import os
 
 router = APIRouter()
+
 CURRENT_PATH = Path("backend/current.json")
 
 @router.get("/current")
