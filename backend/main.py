@@ -2,13 +2,23 @@ from fastapi import FastAPI, Query
 from routers import accounts, current
 from models import Account
 import crud
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
-# ルーターを登録
+#   ルーターを登録
 app.include_router(accounts.router)
 app.include_router(current.router)
+
+#   CORS設定
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/accounts")
 def get_accounts():

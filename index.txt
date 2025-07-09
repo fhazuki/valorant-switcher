@@ -1,0 +1,45 @@
+C:\pg\study\Python\valorant-switcher
+„   .gitignore
+„   current.json
+„   index.txt
+„   README.md
+„   users.json
+„   
+„¥„Ÿbackend
+„   „   crud.py
+„   „   database.py
+„   „   main.py
+„   „   models.py
+„   „   requirements.txt
+„   „   schemas.py
+„   „   
+„   „¥„Ÿrouters
+„   „   „   accounts.py
+„   „   „   current.py
+„   „   „   
+„   „   „¤„Ÿ__pycache__
+„   „  
+„   „           
+„   „¤„Ÿvenv
+„            
+„           
+„¥„Ÿdata
+„       users.enc
+„       
+„¥„Ÿgui
+„   „   .gitignore
+„   „   eslint.config.js
+„   „   index.html
+„   „   package-lock.json
+„   „   package.json
+„   „   README.md
+„   „   tsconfig.app.json
+„   „   tsconfig.json
+„   „   tsconfig.node.json
+„   „   vite.config.ts
+„   „   
+„   „¤„Ÿnode_modules
+„                                
+„¤„Ÿscripts
+        crypto.py
+        
