@@ -18,18 +18,18 @@ def load_accounts():
             json.dump(data, f, indent=2, ensure_ascii=False)
 
 @router.get("/accounts")
-def get_accounts():
+def get_accounts_handler():
     return load_accounts()
 
 @router.post("/accounts")
-def add_account(account: Account):
+def add_account_handler(account: Account):
     data = load_accounts()
     data.append(account.dict())
     save_accounts(data)
     return {"message": "Account added"}
 
 @router.delete("/accounts")
-def delete_account(game_name: str):
+def delete_account_handler(game_name: str):
     data = load_accounts()
     new_data = [acc for acc in data if ac["game_name"] != game_name]
     if len(data) == len(new_data):
