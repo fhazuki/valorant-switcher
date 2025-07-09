@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Query
-from backend.routers import accounts, current
-from backend.models import Account
-from backend import crud
+from routers import accounts, current
+from models import Account
+import crud
 
 
 app = FastAPI()

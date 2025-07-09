@@ -1,4 +1,4 @@
-from .database import load_accounts, save_accounts, load_current, save_current
+from database import load_accounts, save_accounts, load_current, save_current
 
 def get_accounts():
     return load_accounts()

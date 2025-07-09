@@ -5,7 +5,7 @@ import os
 
 router = APIRouter()
 
-CURRENT_PATH = Path("backend/current.json")
+CURRENT_PATH = Path(__file__).resolve().parent.parent / "current.json"
 
 @router.get("/current")
 def get_current_handler():
