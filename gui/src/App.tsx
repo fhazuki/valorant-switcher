@@ -1,10 +1,16 @@
 import './App.css'
 import LoggedInAccount from "./components/LoggedInAccount";
+import { Toaster, toast } from 'sonner';
 
 function App() {
+  const handleLogin = () => {
+    toast.success('アカウントを切り替えました！');
+  };
 
   return (
     <>
+      <Toaster richColors position='top-center' />
+      <button onClick={handleLogin}>ログイン切り替え</button>
       <div className="flex justify-center mt-6">
         <LoggedInAccount />
       </div>
