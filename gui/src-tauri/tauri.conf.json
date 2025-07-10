@@ -13,10 +13,13 @@
     "windows": [
       {
         "title": "VaLogin",
-        "width": 800,
-        "height": 600,
+        "width": 730,
+        "height": 630,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "transparent": false,
+        "decorations": true,
+        "center": true
       }
     ],
     "security": {
