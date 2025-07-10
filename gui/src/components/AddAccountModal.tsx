@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 interface Props {
     isOpen: boolean;
@@ -32,72 +34,103 @@ const AddAccountModal: React.FC<Props> = ({ isOpen, onClose, onSuccess }) => {
     if (!isOpen) return null;
 
     return (
-        <div
-            style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.6)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 9999,
-                pointerEvents: "auto"
-            }}
-        >
-            <div
-                style={{
-                    background: "#fff",
-                    padding: "24px",
-                    borderRadius: "16px",
-                    width: "400px",
-                    boxShadow: "0 12px 24px rgba(0,0,0,0.3)"
-                }}
-            >
-                <h2 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "16px" }}>
-                    アカウント追加
-                </h2>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="ユーザー名"
-                    value={form.username}
-                    onChange={handleChange}
-                    style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="パスワード"
-                    value={form.password}
-                    onChange={handleChange}
-                    style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-                />
-                <input
-                    type="text"
-                    name="game_name"
-                    placeholder="ゲーム名"
-                    value={form.game_name}
-                    onChange={handleChange}
-                    style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-                />
-                <input
-                    type="text"
-                    name="tag"
-                    placeholder="タグ（任意）"
-                    value={form.tag}
-                    onChange={handleChange}
-                    style={{ width: "100%", padding: "8px", marginBottom: "16px" }}
-                />
-                <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
-                    <button onClick={onClose} style={{ padding: "6px 12px" }}>キャンセル</button>
-                    <button onClick={handleSubmit} style={{ padding: "6px 12px", backgroundColor: "#2563eb", color: "#fff", borderRadius: "4px" }}>追加</button>
-                </div>
-            </div>
-        </div>
+        <AnimatePresence>
+            {isOpen && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.6)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        zIndex: 9999
+                    }}
+                >
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        style={{
+                            background: "#fff",
+                            padding: "28px",
+                            borderRadius: "16px",
+                            width: "400px",
+                            boxShadow: "0 12px 24px rgba(0,0,0,0.3)"
+                        }}
+                    >
+                        <h2 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "24px" }}>
+                            アカウント追加
+                        </h2>
+
+                        {["username", "password", "game_name", "tag"].map((field, idx) => (
+                            <input
+                                key={field}
+                                type={field === "password" ? "password" : "text"}
+                                name={field}
+                                placeholder={
+                                    field === "username"
+                                        ? "ユーザー名"
+                                        : field === "password"
+                                            ? "パスワード"
+                                            : field === "game_name"
+                                                ? "ゲーム名"
+                                                : "タグ（任意）"
+                                }
+                                value={(form as never)[field]}
+                                onChange={handleChange}
+                                style={{
+                                    width: "90%",
+                                    padding: "12px 14px",
+                                    marginBottom: idx === 3 ? "24px" : "16px",
+                                    borderRadius: "8px",
+                                    border: "1px solid #ccc",
+                                    fontSize: "14px"
+                                }}
+                            />
+                        ))}
+
+                        <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px" }}>
+                            <button
+                                onClick={onClose}
+                                style={{
+                                    padding: "8px 16px",
+                                    backgroundColor: "#eee",
+                                    borderRadius: "6px",
+                                    border: "none",
+                                    fontSize: "14px"
+                                }}
+                            >
+                                キャンセル
+                            </button>
+                            <button
+                                onClick={handleSubmit}
+                                style={{
+                                    padding: "8px 16px",
+                                    backgroundColor: "#2563eb",
+                                    color: "#fff",
+                                    border: "none",
+                                    borderRadius: "6px",
+                                    fontSize: "14px"
+                                }}
+                            >
+                                追加
+                            </button>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
+
 };
 
 export default AddAccountModal;
