@@ -9,6 +9,7 @@ const App = () => {
   const [showToast, setShowToast] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [accounts, setAccounts] = useState<any[]>([]);
+  const [selectedAccount, setSelectedAccount] = useState<any | null>(null); // 追加
 
   // アカウント一覧を取得
   const fetchAccounts = async () => {
@@ -63,6 +64,47 @@ const App = () => {
         />
       )}
 
+      {selectedAccount && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[999] flex justify-center items-center">
+          <div className="bg-white text-gray-800 p-6 rounded-2xl shadow-2xl w-[400px] animate-fade-in">
+            <h2 className="text-xl font-bold mb-6 text-center">アカウント詳細</h2>
+            <div className="space-y-4 text-sm">
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">ゲーム名</label>
+                <div className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2">{selectedAccount.game_name}</div>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">ユーザー名</label>
+                <div className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2">{selectedAccount.username}</div>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">タグ</label>
+                <div className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2">{selectedAccount.tag || 'なし'}</div>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">レベル</label>
+                <div className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2">{selectedAccount.level || '-'}</div>
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setSelectedAccount(null)}
+                className="bg-gray-100 hover:bg-gray-200 text-sm px-4 py-2 rounded shadow"
+              >
+                閉じる
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
+
+
+
+
+
       <div className="max-w-[700px] mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
@@ -97,7 +139,8 @@ const App = () => {
           {accounts.map((account, i) => (
             <div
               key={i}
-              className="bg-gray-100 h-[60px] rounded flex items-center justify-center shadow-sm"
+              onClick={() => setSelectedAccount(account)}
+              className="bg-gray-100 h-[60px] rounded flex items-center justify-center shadow-sm cursor-pointer hover:bg-gray-200 transition"
             >
               {account.game_name}
             </div>

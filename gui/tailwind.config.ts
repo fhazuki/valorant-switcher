@@ -20,4 +20,13 @@ const config: Config = {
     },
     plugins: [],
 }
-export default config
+
+export default {
+    theme: {
+        extend: {
+            zIndex: {
+                '999': '999',
+            },
+        },
+    },
+};
